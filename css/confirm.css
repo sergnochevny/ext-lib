@@ -1,0 +1,9 @@
+.modal .modal-content{
+    border-radius: 5px;
+}
+.modal-header{
+    text-align: center;
+}
+.modal-body{
+    text-align: center;
+}

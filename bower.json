@@ -1,0 +1,13 @@
+{
+  "name": "ext-lib",
+  "description": "JQuery Library Extensions",
+  "version": "1.0.1",
+  "main": [
+    "js/*.js",
+    "css/*css"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "jquery": ">=1.10"
+  }
+}
