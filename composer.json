@@ -1,0 +1,28 @@
+{
+    "name": "ext-lib",
+    "description": "JQuery Library Extensions",
+    "type": "component",
+    "license": "MIT",
+    "require": {
+        "components/jquery": ">=1.10"
+    },
+    "authors": [
+        {
+            "name": "AIT Serg Nochevny",
+            "homepage": "http://www.ait.com"
+        }
+    ],
+    "extra": {
+        "component": {
+            "name": "ext-lib",
+            "scripts": [
+                "js/library.extends.min.js",
+                "js/jquery.fileapi.min.js"
+            ],
+            "files": [
+                "js/**",
+                "css/**"
+            ]
+        }
+    }
+}
