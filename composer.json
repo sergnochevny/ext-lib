@@ -1,6 +1,7 @@
 {
     "name": "ext-lib",
     "description": "JQuery Library Extensions",
+    "version": "1.0.2",
     "type": "component",
     "license": "MIT",
     "require": {
