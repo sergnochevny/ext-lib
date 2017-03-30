@@ -1,5 +1,5 @@
 {
-  "name": "ext-lib",
+  "name": "bower/ext-lib",
   "version": "1.0.3",
   "description": "JQuery Library Extensions",
   "repository": {
