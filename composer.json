@@ -1,7 +1,6 @@
 {
-    "name": "ext-lib",
+    "name": "bower/ext-lib",
     "description": "JQuery Library Extensions",
-    "version": "1.0.3",
     "type": "component",
     "license": "MIT",
     "require": {
