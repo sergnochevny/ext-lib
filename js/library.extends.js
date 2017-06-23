@@ -43,7 +43,7 @@ function alert(message, ok) {
                     '</div>';
                 switch (action) {
                     case 'show':
-                        if ($('.loader').length == 0) {
+                        if ($('.loader').length > 0) {
                             $('.loader').fadeIn();
                         } else {
                             if ($('#wait_loader').length == 0) {
@@ -52,7 +52,7 @@ function alert(message, ok) {
                         }
                         break;
                     case 'remove':
-                        if ($('.loader').length == 0) {
+                        if ($('.loader').length > 0) {
                             $('.loader').fadeOut(1000);
                         } else {
                             if ($('#wait_loader').length > 0) {
