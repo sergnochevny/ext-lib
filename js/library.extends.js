@@ -34,6 +34,48 @@ function alert(message, ok) {
     );
 };
 
+function confirm(message, ok, cancel) {
+    var modal =
+        '<div id="confirm" class="modal fade">' +
+        '   <div class="modal-dialog">' +
+        '       <div class="modal-content">' +
+        '           <div class="modal-header">' +
+        '               <button id="close-confirm" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+        '               <h4 class="modal-title">Confirmation&hellip;</h4>' +
+        '           </div>' +
+        '           <div class="modal-body">' +
+        '               <p>' + message + '</p>' +
+        '           </div>' +
+        '           <div class="modal-footer">' +
+        '               <button id="yes-confirm" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>' +
+        '               <button id="no-confirm" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>' +
+        '           </div>' +
+        '       </div><!-- /.modal-content -->' +
+        '   </div><!-- /.modal-dialog -->' +
+        '</div><!-- /.modal -->';
+    $.when($('body').append(modal)).done(
+        function () {
+            $('#confirm').on('hidden.bs.modal',
+                function (event) {
+                    $(this).remove();
+                }
+            );
+            $('#no-confirm').on('click',
+                function (event) {
+                    !cancel || cancel();
+                }
+            );
+            $('#yes-confirm').on('click',
+                function (event) {
+                    !ok || ok();
+                }
+            );
+            $('#confirm').modal('show');
+
+        }
+    );
+};
+
 (function ($) {
     $.fn.extend(
         {
@@ -67,46 +109,8 @@ function alert(message, ok) {
 
     $.fn.extend(yii, {
         confirm: function (message, ok, cancel) {
-            var modal =
-                '<div id="confirm" class="modal fade">' +
-                '   <div class="modal-dialog">' +
-                '       <div class="modal-content">' +
-                '           <div class="modal-header">' +
-                '               <button id="close-confirm" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-                '               <h4 class="modal-title">Confirmation&hellip;</h4>' +
-                '           </div>' +
-                '           <div class="modal-body">' +
-                '               <p>' + message + '</p>' +
-                '           </div>' +
-                '           <div class="modal-footer">' +
-                '               <button id="yes-confirm" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>' +
-                '               <button id="no-confirm" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>' +
-                '           </div>' +
-                '       </div><!-- /.modal-content -->' +
-                '   </div><!-- /.modal-dialog -->' +
-                '</div><!-- /.modal -->';
-            $.when($('body').append(modal)).done(
-                function () {
-                    $('#confirm').on('hidden.bs.modal',
-                        function (event) {
-                            $(this).remove();
-                        }
-                    );
-                    $('#no-confirm').on('click',
-                        function (event) {
-                            !cancel || cancel();
-                        }
-                    );
-                    $('#yes-confirm').on('click',
-                        function (event) {
-                            !ok || ok();
-                        }
-                    );
-                    $('#confirm').modal('show');
-
-                }
-            );
-        },
+            confirm(message, ok, cancel);
+        }
     });
 
     $.fn.extend(yii, {
