@@ -122,17 +122,16 @@ function confirm(message, ok, cancel) {
 
     $('document').ready(
         function () {
-            $('[data-pjax-container]').on('pjax:start',
-                function () {
-                    $('body').waitloader('show');
-                }
-            );
-
-            $('[data-pjax-container]').on('pjax:end',
-                function () {
-                    $('body').waitloader('remove');
-                }
-            );
+            $('[data-pjax-container]').on('pjax:start', function () {
+                $('body').waitloader('show');
+            }).on('pjax:end', function () {
+                $('body').waitloader('remove');
+            });
+            $(document).on("ajaxSend", function () {
+                $('body').waitloader('show');
+            }).on("ajaxComplete", function () {
+                $('body').waitloader('remove');
+            });
         }
     );
 })(jQuery);
