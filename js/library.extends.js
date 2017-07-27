@@ -102,8 +102,8 @@
                     break;
                 case 'remove':
                     _waitloader_counter -= 1;
-                    if (wl_counter <= 0) {
-                        wl_counter = 0;
+                    if (_waitloader_counter <= 0) {
+                        _waitloader_counter = 0;
                         if (_loader.length > 0) {
                             _loader.fadeOut(1000);
                         } else {
