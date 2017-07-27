@@ -1,51 +1,50 @@
 (function ($) {
-    var dfd,
-        wl_counter = 0,
-        confirm_modal =
-            '<div id="confirm" class="modal fade">' +
-            '   <div class="modal-dialog">' +
-            '       <div class="modal-content">' +
-            '           <div class="modal-header">' +
-            '               <button id="close-confirm" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-            '               <h4 class="modal-title">Confirmation&hellip;</h4>' +
-            '           </div>' +
-            '           <div class="modal-body">' +
-            '               <p>' + message + '</p>' +
-            '           </div>' +
-            '           <div class="modal-footer">' +
-            '               <button id="yes-confirm" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>' +
-            '               <button id="no-confirm" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>' +
-            '           </div>' +
-            '       </div><!-- /.modal-content -->' +
-            '   </div><!-- /.modal-dialog -->' +
-            '</div><!-- /.modal -->',
-        alert_modal =
-            '<div id="alert" class="modal fade">' +
-            '   <div class="modal-dialog">' +
-            '       <div class="modal-content">' +
-            '           <div class="modal-header">' +
-            '               <button id="close-confirm" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-            '               <h4 class="modal-title">Alert&hellip;</h4>' +
-            '           </div>' +
-            '           <div class="modal-body">' +
-            '               <p>' + message + '</p>' +
-            '           </div>' +
-            '           <div class="modal-footer">' +
-            '               <button id="ok-confirm" type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>' +
-            '           </div>' +
-            '       </div><!-- /.modal-content -->' +
-            '   </div><!-- /.modal-dialog -->' +
-            '</div><!-- /.modal -->',
-        wait_loader_fa = '<div class="ui-widget-overlay" id="wait_loader">' +
+    var _waitloader_counter = 0,
+        _get_confirm_modal = function (message) {
+            return '<div id="confirm" class="modal fade">' +
+                '   <div class="modal-dialog">' +
+                '       <div class="modal-content">' +
+                '           <div class="modal-header">' +
+                '               <button id="close-confirm" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                '               <h4 class="modal-title">Confirmation&hellip;</h4>' +
+                '           </div>' +
+                '           <div class="modal-body">' +
+                '               <p>' + message + '</p>' +
+                '           </div>' +
+                '           <div class="modal-footer">' +
+                '               <button id="yes-confirm" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>' +
+                '               <button id="no-confirm" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>' +
+                '           </div>' +
+                '       </div><!-- /.modal-content -->' +
+                '   </div><!-- /.modal-dialog -->' +
+                '</div><!-- /.modal -->';
+        },
+        _get_alert_modal = function (message) {
+            return '<div id="alert" class="modal fade">' +
+                '   <div class="modal-dialog">' +
+                '       <div class="modal-content">' +
+                '           <div class="modal-header">' +
+                '               <button id="close-confirm" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                '               <h4 class="modal-title">Alert&hellip;</h4>' +
+                '           </div>' +
+                '           <div class="modal-body">' +
+                '               <p>' + message + '</p>' +
+                '           </div>' +
+                '           <div class="modal-footer">' +
+                '               <button id="ok-confirm" type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>' +
+                '           </div>' +
+                '       </div><!-- /.modal-content -->' +
+                '   </div><!-- /.modal-dialog -->' +
+                '</div><!-- /.modal -->';
+        },
+        _wait_loader_fa = '<div class="ui-widget-overlay" id="wait_loader">' +
             '<i class="fa fa-spinner fa-pulse fa-4x" aria-hidden="true"></i>' +
             '</div>';
 
 
     !$ || (function () {
-        dfd = $.Deferred();
-
         window.alert = function (message, ok) {
-            $.when($('body').append(alert_modal)).done(
+            $.when($('body').append(_get_alert_modal(message))).done(
                 function () {
                     var _alert = $('#alert');
                     _alert.on('hidden.bs.modal',
@@ -64,7 +63,7 @@
         };
 
         window.confirm = function (message, ok, cancel) {
-            $.when($('body').append(confirm_modal)).done(
+            $.when($('body').append(_get_confirm_modal(message))).done(
                 function () {
                     var _confirm = $('#confirm');
                     _confirm.on('hidden.bs.modal',
@@ -87,52 +86,40 @@
             );
         };
 
-        var _waitloader_lock = function () {
-                debugger;
-                $.when(dfd.promise());
-            },
-            _waitloader_unlock = function () {
-                debugger;
-                dfd.resolve();
-            },
-            _waitloader_do_action = function (action) {
-                var _loader = $('.loader'),
-                    _waitloader = $('#wait_loader');
-                switch (action) {
-                    case 'show':
-                        debugger;
-                        wl_counter += 1;
+        var _waitloader_do_action = function (action) {
+            var _loader = $('.loader'),
+                _waitloader = $('#wait_loader');
+            switch (action) {
+                case 'show':
+                    _waitloader_counter += 1;
+                    if (_loader.length > 0) {
+                        _loader.fadeIn();
+                    } else {
+                        if (!_waitloader.length) {
+                            $(_wait_loader_fa).appendTo(this).css('z-index', '100000000');
+                        }
+                    }
+                    break;
+                case 'remove':
+                    _waitloader_counter -= 1;
+                    if (wl_counter <= 0) {
+                        wl_counter = 0;
                         if (_loader.length > 0) {
-                            _loader.fadeIn();
+                            _loader.fadeOut(1000);
                         } else {
-                            if (!_waitloader.length) {
-                                $(wait_loader_fa).appendTo(this).css('z-index', '100000000');
+                            if (_waitloader.length > 0) {
+                                _waitloader.remove();
                             }
                         }
-                        break;
-                    case 'remove':
-                        debugger;
-                        wl_counter -= 1;
-                        if(wl_counter <= 0){
-                            wl_counter = 0;
-                            if (_loader.length > 0) {
-                                _loader.fadeOut(1000);
-                            } else {
-                                if (_waitloader.length > 0) {
-                                    _waitloader.remove();
-                                }
-                            }
-                        }
-                        break;
-                }
-            };
+                    }
+                    break;
+            }
+        };
 
         $.fn.extend(
             {
                 waitloader: function (action) {
-                    _waitloader_lock();
-                    _waitloader_do_action(action);
-                    _waitloader_unlock();
+                    _waitloader_do_action.call(this, action);
                 }
             }
         );
@@ -158,9 +145,10 @@
                 }).on("ajaxComplete", function () {
                     $('body').waitloader('remove');
                 });
+
+                $('body').waitloader('remove');
+
             }
         );
-
     })();
 })(jQuery);
-
