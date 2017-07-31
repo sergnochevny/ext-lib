@@ -15,3 +15,5 @@ themes/classic/views/
 out
 gen
 /vendor/
+/node_modules/
+/dev/

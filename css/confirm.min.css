@@ -1,1 +1,1 @@
-.modal .modal-content{border-radius:5px}.modal-header{text-align:center}.modal-body{text-align:center}
+.modal .modal-content{-webkit-border-radius:5px;border-radius:5px}.modal-body,.modal-header{text-align:center}

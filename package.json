@@ -1,0 +1,37 @@
+{
+  "name": "ext-lib",
+  "version": "1.0.0",
+  "description": "Gulp Project",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Serg Nochevny AIT",
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-cache": "^0.4.2",
+    "gulp-clean-css": "^3.7.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-cssnano": "^2.1.1",
+    "gulp-csso": "^3.0.0",
+    "gulp-gzip": "^1.4.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-less": "^3.3.0",
+    "gulp-minify": "0.0.14",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-uglifyjs": "^0.6.2"
+  },
+  "dependencies": {
+    "psi": "^3.0.0"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.ait.com:ait/extlib.git"
+  }
+}
