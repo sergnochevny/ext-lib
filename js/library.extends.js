@@ -19,13 +19,14 @@
                 '   </div><!-- /.modal-dialog -->' +
                 '</div><!-- /.modal -->';
         },
-        _get_alert_modal = function (message) {
+        _get_alert_modal = function (message, title) {
+
             return '<div id="alert" class="modal fade">' +
                 '   <div class="modal-dialog">' +
                 '       <div class="modal-content">' +
                 '           <div class="modal-header">' +
                 '               <button id="close-confirm" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-                '               <h4 class="modal-title">Alert&hellip;</h4>' +
+                '               <h4 class="modal-title">' + (title ? title : 'Alert&hellip;') + '</h4>' +
                 '           </div>' +
                 '           <div class="modal-body">' +
                 '               <p>' + message + '</p>' +
@@ -44,7 +45,10 @@
 
     !$ || (function () {
         window.alert = function (message, ok) {
-            $.when($('body').append(_get_alert_modal(message))).done(
+            var title = undefined;
+            (message.title) && (title = message.title);
+            (message.title) && (message = message.message);
+            $.when($('body').append(_get_alert_modal(message, title))).done(
                 function () {
                     var _alert = $('#alert');
                     _alert.on('hidden.bs.modal',
