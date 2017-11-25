@@ -7,7 +7,7 @@
   position: fixed;
   background-color: #aaaaaa;
   opacity: 0.5;
-  z-index: 10000; }
+  z-index: 1000000000000; }
   #wait_loader i {
     position: relative;
     left: 50vw;
