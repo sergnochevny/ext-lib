@@ -38,7 +38,7 @@
                 '   </div><!-- /.modal-dialog -->' +
                 '</div><!-- /.modal -->';
         },
-        _wait_loader_fa = '<div class="ui-widget-overlay" id="wait_loader">' +
+        _wait_loader_fa = '<div class="ui-widget-overlay" id="wait_loader" style="display: none">' +
             '<i class="fa fa-spinner fa-pulse fa-4x" aria-hidden="true"></i>' +
             '</div>';
 
@@ -100,7 +100,10 @@
                         _loader.fadeIn();
                     } else {
                         if (!_waitloader.length) {
-                            $(_wait_loader_fa).appendTo(this).css('z-index', '100000000');
+                            $.when($(_wait_loader_fa).appendTo(this).css('z-index', '100000000'))
+                                .done(function () {
+                                    $(_wait_loader_fa).fadeIn();
+                                });
                         }
                     }
                     break;
@@ -112,7 +115,10 @@
                             _loader.fadeOut(1000);
                         } else {
                             if (_waitloader.length > 0) {
-                                _waitloader.remove();
+                                $.when(_waitloader.fadeOut(1000))
+                                    .done(function () {
+                                        _waitloader.remove();
+                                    });
                             }
                         }
                     }
