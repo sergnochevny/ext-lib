@@ -2,16 +2,8 @@
 
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
-    concat = require('gulp-concat'),
-    concatCss = require('gulp-concat-css'),
-    csso = require('gulp-csso'),
-    uglify = require('gulp-uglifyjs'),
-    cssnano = require('gulp-cssnano'),
     minify = require('gulp-minify'),
     rename = require('gulp-rename'),
-    del = require('del'),
-    gzip = require('gulp-gzip'),
-    imagemin = require('gulp-imagemin'),
     cache = require('gulp-cache'),
     cleanCSS = require('gulp-clean-css'),
     autoprefixer = require('gulp-autoprefixer');

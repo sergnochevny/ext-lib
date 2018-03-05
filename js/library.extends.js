@@ -134,7 +134,7 @@
             }
         );
 
-        !yii || $.fn.extend(yii, {
+        window.yii && $.fn.extend(window.yii, {
             alert: function (message, ok) {
                 window.alert(message, ok);
             },
@@ -161,4 +161,4 @@
             }
         );
     })();
-})(jQuery);
+})(window.jQuery || window.$);
