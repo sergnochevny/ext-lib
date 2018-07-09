@@ -2,10 +2,6 @@
   "name": "bower/ext-lib",
   "version": "1.0.4",
   "description": "JQuery Library Extensions",
-  "repository": {
-    "type": "git",
-    "url": "git@gitlab.ait.com:ait/extlib.git"
-  },
   "main": [
     "js/*.js",
     "css/*.css"
